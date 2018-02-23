@@ -26,7 +26,9 @@ github_username:  torrens
 
 # Build settings
 markdown: kramdown
+theme_color: blue
 theme: jekyll-swiss
+
 plugins:
   - jekyll-feed
 

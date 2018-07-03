@@ -3,18 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="06b3f57e-44ae-478f-90f3-9950196b9855" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_posts/2018-02-23-initial-post.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2018-07-02-registers.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_posts/2018-02-23-seond-post.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_posts/2018-02-23-welcome-to-jekyll.markdown" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_posts/passwordProtected.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2018-07-02-registers.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2018-07-02-registers.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/_site/feed.xml" beforeDir="false" afterPath="$PROJECT_DIR$/_site/feed.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/_site/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/jekyll/update/2018/02/23/initial-post.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/jekyll/update/2018/02/23/seond-post.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/jekyll/update/2018/02/23/welcome-to-jekyll.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/torrens.github.io.iml" beforeDir="false" afterPath="$PROJECT_DIR$/_site/torrens.github.io.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/passwordProtected.docx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/torrens.github.io.iml" beforeDir="false" afterPath="$PROJECT_DIR$/torrens.github.io.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/x86/2018/07/02/registers.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/x86/2018/07/02/registers.html" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -30,8 +22,8 @@
         <entry file="file://$PROJECT_DIR$/_posts/2018-07-02-registers.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="FIRST">
-              <first_editor relative-caret-position="427">
-                <caret line="73" column="55" selection-start-line="73" selection-start-column="55" selection-end-line="73" selection-end-column="55" />
+              <first_editor relative-caret-position="457">
+                <caret line="302" selection-start-line="302" selection-end-line="302" />
               </first_editor>
               <second_editor />
             </state>
@@ -83,10 +75,10 @@
   <component name="NodePackageJsonFileManager">
     <packageJsonPaths />
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="y" value="23" />
-    <option name="width" value="1440" />
-    <option name="height" value="877" />
+  <component name="ProjectFrameBounds" extendedState="6" fullScreen="true">
+    <option name="x" value="1290" />
+    <option name="width" value="150" />
+    <option name="height" value="900" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -196,16 +188,15 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1530562998609</updated>
-      <workItem from="1530563000224" duration="3001000" />
+      <workItem from="1530563000224" duration="9165000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="3001000" />
+    <option name="totallyTimeSpent" value="9165000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1440" height="877" extended-state="0" />
-    <editor active="true" />
+    <frame x="722" y="0" width="718" height="900" extended-state="6" />
     <layout>
       <window_info anchor="right" id="Palette" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -217,10 +208,10 @@
       <window_info anchor="bottom" id="Database Changes" show_stripe_button="false" />
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info anchor="bottom" id="Version Control" />
-      <window_info active="true" anchor="bottom" id="Terminal" visible="true" weight="0.32893" />
+      <window_info active="true" anchor="bottom" id="Terminal" visible="true" weight="0.31047383" />
       <window_info id="Capture Tool" />
       <window_info id="Designer" />
-      <window_info content_ui="combo" id="Project" order="0" weight="0.5162722" />
+      <window_info content_ui="combo" id="Project" order="0" weight="1.0" />
       <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
       <window_info anchor="right" id="Database" />
       <window_info anchor="right" id="SciView" />
@@ -271,8 +262,8 @@
     <entry file="file://$PROJECT_DIR$/_posts/2018-07-02-registers.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="FIRST">
-          <first_editor relative-caret-position="427">
-            <caret line="73" column="55" selection-start-line="73" selection-start-column="55" selection-end-line="73" selection-end-column="55" />
+          <first_editor relative-caret-position="457">
+            <caret line="302" selection-start-line="302" selection-end-line="302" />
           </first_editor>
           <second_editor />
         </state>

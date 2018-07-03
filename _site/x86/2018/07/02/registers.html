@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>x86 Registers</title>
+  <title>x86 Registers Overview</title>
   <meta name="description" content="x86 Registers">
 
   
@@ -54,13 +54,17 @@
 
     <div>
       <article class="container px-2 mx-auto mb4" itemscope itemtype="http://schema.org/BlogPosting">
-  <h1 class="h0 col-9 sm-width-full py-4 mt-3 inline-block" itemprop="name headline">x86 Registers</h1>
+  <h1 class="h0 col-9 sm-width-full py-4 mt-3 inline-block" itemprop="name headline">x86 Registers Overview</h1>
   <div class="col-4 sm-width-full mt-1 border-top-thin ">
     <p class="mb-3 py-2 bold h4"><time datetime="2018-07-02T10:53:41+01:00" itemprop="datePublished">Jul 2, 2018</time></p>
   </div>
 
   <div class="prose" itemprop="articleBody">
       <h1 id="x86-registers">x86 Registers</h1>
+
+<p>The purpose of this post is to help me learn and remember the basic rules of x86 registers.
+I’ve posted it here to benefit myself any others.
+These notes are heavily inspired by <a href="http://www.cs.virginia.edu/~evans/cs216/guides/x86.html">x86 Assembly Guide, University of Virginia</a></p>
 
 <p>x86 processors have eight 32-bit general purpose registers.<br />
 32 bit (4 byte) registers EAX, EBX, ECX and EDX have subsections that can be referenced.<br />
@@ -125,13 +129,178 @@ The most significant bytes of AX, called AH, can be used as an 8 bit register.</
 
 <h1 id="static-data-regions">Static Data Regions</h1>
 
+<p>Static data regions are the global variables of a software program.<br />
+Data directives DB, DW and DD are used to declare one, two and four byte data locations.<br />
+Data locations can be labeled with names or left anonymous.</p>
+
+<p><strong>Examples</strong></p>
+
+<figure class="highlight"><pre><code class="language-assembly" data-lang="assembly">.Data
+
+var   DB  55   ; Declare a byte value, labeled as location var, containing a value of 55
+var2  DB  ?    ; Declare a byte value, labeled as location var2, uninitialised
+      DB  10   ; Declare a byte value, with no label, containing a value of 10, Its location is var2 + 1
+X     DW  ?    ; Declare a 2 byte value, labeled as location X, uninitialised
+
+Y     DD  1000 ; Declare a 4 byte value, labeled as location Y, containing a value of 1000</code></pre></figure>
+
+<h1 id="static-data-arrays">Static Data Arrays</h1>
+
+<p>x86 arrays are defined as a number of data values listed contiguously in memory.<br />
+An array can be declared as listing the values.
+An array can be declared using the DUP directive.
+An array can be declared as listing string values.</p>
+
+<p><strong>Examples</strong></p>
+
+<figure class="highlight"><pre><code class="language-assembly" data-lang="assembly">.Data
+
+Z  DD  1, 2, 3    ; Declare three 4 byte values, initialised to 1, 2 and 3
+T  DB  10  DUP(?) ; Declare 10 uninitialised bytes
+U  DD  100  DUP(0) ; Declare 100 4 byte values, each initialised to 0
+P  DB  'world', 0 ; Declare 6 bytes starting at address P, initialised to the values world and 0</code></pre></figure>
+
 <h1 id="addressing-memory">Addressing Memory</h1>
+
+<p>x86 processors can address up to 2<sup>32</sup> bytes of memory. 
+Memory addresses are 32 bits wide.<br />
+Value labels are replaced by the assembler with 32 bit quantities.<br />
+Addressing is used by many x86 instructions.</p>
+
+<p><strong>Examples</strong></p>
+
+<figure class="highlight"><pre><code class="language-assembly" data-lang="assembly">mov  eax,       [ebx]       ; Move the 4 bytes in memory at the address contained in EBX into EAX.
+mov  [var],     ebx         ; Move the contents of EBX into the 4 bytes at memory address var.  
+mov  eax,       [esi-4]     ; Move 4 bytes at memory address ESI + (-4) into EAX.  
+mov  [esi+eax], cl          ; Move the contents of CL into the byte at address ESI + EAX.   
+mov  edx,       [esi+4*ebx] ; Move the 4 bytes of data at address ESI+4*EBX into EDX.  </code></pre></figure>
 
 <h1 id="size-directives">Size Directives</h1>
 
-<h1 id="instructions">Instructions</h1>
+<p>Generally the size of the data item at a given memory address can be inferred.<br />
+When a 32 bit register is loaded, the assembler infers that the region of memory referred is 4 bytes wide.
+When the value of a one byte register is stored, the assembler infers that the address should refer to a single byte.<br />
+In some cases the operation is ambiguous.
+The size directives BYTE PTR, WORD PTR and WORD PTR indicate 1, 2 and 4 bytes respectively.</p>
 
-<p><a href="http://www.cs.virginia.edu/~evans/cs216/guides/x86.html">Inspired by x86 Assembly Guide, University of Virginia</a></p>
+<p><strong>Examples</strong></p>
+
+<figure class="highlight"><pre><code class="language-assembly" data-lang="assembly">mov  BYTE PTR [ebx], 2  ; Move 2 into the single byte at the address stored in EBX.  
+mov  WORD PTR [ebx], 2  ; Move the 2 byte integer representation of 2 into the 2 bytes starting at address stored in EBX.  
+mov  DWORD PTR [ebx], 2 ; Move the 4 byte integer representation of 2 into the 4 bytes starting at address stored in EBX.  
+ </code></pre></figure>
+
+<h1 id="data-movement-instructions">Data Movement Instructions</h1>
+
+<p><strong>mov</strong> - The mov instruction copies the data item referred to by its second operand into the location referred to the first operand.</p>
+
+<p>Register to register moves are possible.
+Memory to memory moves are not possible.</p>
+
+<p><strong>Examples</strong></p>
+
+<figure class="highlight"><pre><code class="language-assembly" data-lang="assembly">mov eax, ebx          ; Copy the value in EBX to EAX.  
+mov BYTE PTR [var], 5 ; Store the value of 5 into the byte at location var.  </code></pre></figure>
+
+<p><strong>push</strong> - The push instruction places its operand onto the top of the stack.</p>
+
+<p>Push first decrements ESP by 4, then places its operand into the contents of the location at address ESP.<br />
+ESP, the stack pointer is decremented as the x86 stack grows down.
+The stcak grows from high addresses to lower addresses.</p>
+
+<p><strong>Examples</strong></p>
+
+<figure class="highlight"><pre><code class="language-assembly" data-lang="assembly">push eax   ; Push eax onto the stack
+push [var] ; Push the 4 bytes at address var onto the stack.   </code></pre></figure>
+
+<p><strong>pop</strong> - The pop instruction removes the 4 byte data element from the top of the stack into the specified operand.</p>
+
+<p>Pop first moves the 4 bhtes located at memory location [SP] into the specified register or memory location and then increments SP by 4.</p>
+
+<p><strong>Examples</strong></p>
+
+<figure class="highlight"><pre><code class="language-assembly" data-lang="assembly">pop edi   ; Pop the top element of the stack into EDI.  
+pop [ebx] ; Pop the top element of the stack into the four bytes starting at location EBX.  </code></pre></figure>
+
+<h1 id="arithmetic-and-logic-instructions">Arithmetic and Logic Instructions</h1>
+
+<p><strong>add</strong> - The add instruction adds together two operands and stores the result in the first.</p>
+
+<p>Both operands may be registers.<br />
+Only one operand can be a memory location.</p>
+
+<p><strong>Examples</strong></p>
+
+<figure class="highlight"><pre><code class="language-assembly" data-lang="assembly">add eax, 10            ; The value of EAX is changed to EAX + 10.  
+add BYTE PTR [var], 10 ; Add 10 to the single byte stored at memory address var.  </code></pre></figure>
+
+<p><strong>sub</strong> - The sub instruction subtracts the value of the second operand from the value of the first operand, and stores the result in the first operand.</p>
+
+<p><strong>Examples</strong></p>
+
+<figure class="highlight"><pre><code class="language-assembly" data-lang="assembly">sub al, ah   ; The value of AL is changed to AL - AH.  
+sub eax, 216 ; Subtract 216 from the value stored in EAX.  </code></pre></figure>
+
+<p><strong>inc, dec</strong> - The inc instruction increments the contents of its operand by 1.<br />
+The dec instruction decrements the contents of its operand by 1.</p>
+
+<p><strong>Examples</strong></p>
+
+<figure class="highlight"><pre><code class="language-assembly" data-lang="assembly">inc DWORD PTR [var] ; Increments the 4 byte value stored in var.  
+dec eax             ; Decrements EAX.  </code></pre></figure>
+
+<p><strong>and, or, xor</strong> - These instructions perform bitwise manipulations.</p>
+
+<p><strong>Examples</strong></p>
+
+<figure class="highlight"><pre><code class="language-assembly" data-lang="assembly">and eax, 0fH ; Clear all but the last 4 bits of EAX.  0f hex equals b00001111  
+xor edx, edx ; Sets the contents of EDX to 0.  </code></pre></figure>
+
+<p><strong>not</strong> - Bitwise not</p>
+
+<p><strong>Examples</strong></p>
+
+<figure class="highlight"><pre><code class="language-assembly" data-lang="assembly">not BYTE PTR [var] ; Negates all bits in the byte at the memory location var.  </code></pre></figure>
+
+<h1 id="control-flow-instructions">Control Flow Instructions</h1>
+
+<p>x86 processors maintain a 32 bit value instruction pointer IP register.<br />
+The IP increments to point to the next instruction in memory.<br />
+Labels are used to as places in the program that the IP can be moved to.</p>
+
+<p><strong>jmp</strong> - The jmp instruction transfers program to the instruction at the memory indicated by the operand.</p>
+
+<p><strong>Example</strong></p>
+
+<figure class="highlight"><pre><code class="language-assembly" data-lang="assembly">jmp start ; Jump to the instruction labeled start.  </code></pre></figure>
+
+<p><strong>jcondition</strong> - The conditional jump instructions transfers the instruction pointer based on a condition.  The conditional jump instructions are used in conjunction with the cmp (compare) instruction.</p>
+
+<p>The available conditional jump instructions are:</p>
+
+<p>je - jump when equal<br />
+jne - jump when not equal<br />
+jz - jump when the last result was zero<br />
+jg - jump when greater than<br />
+jge - jump when greater than or equal to
+jl - jump when less than<br />
+jle - jump when less than or equal to</p>
+
+<p><strong>Example</strong></p>
+
+<figure class="highlight"><pre><code class="language-assembly" data-lang="assembly">cmp eax, ebx
+jle done      ; If the contents of EAX are less than or equal to the contents of EBX, jump to the label done.  </code></pre></figure>
+
+<p><strong>call, ret</strong> - Subroutine call and return</p>
+
+<p>The call instruction first pushed the current code location onto the stack and then performs an unconditional jump to the code location indicated by the label operand.<br />
+The ret instruction implements a subroutine return mechanism.<br />
+This pops a code location off the stack and then performs an unconditional jump to the retrieved code location.</p>
+
+<p><strong>Example</strong></p>
+
+<figure class="highlight"><pre><code class="language-assembly" data-lang="assembly">call doit
+ret</code></pre></figure>
 
   </div>
 
